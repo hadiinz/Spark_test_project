@@ -29,7 +29,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.println("hi");
 
-        //build the spark sesssion
+        //build the spark session
         SparkSession session = SparkSession.builder().appName("data in excel").master("local[*]").getOrCreate();
 
         //set the log level only to log errors
@@ -50,16 +50,18 @@ public class Main {
 //                .option("addColorColumns", "False")
 //                .load();
 
-        System.out.println(new Date());
         //read from csv file
+        System.out.println("********** Read from CSV file *********");
+        System.out.println(new Date());
         Dataset<Row> fileStreamDF = session.read()
                 .option("header", "true")
                 .format("csv")
                 .schema(schema)
                 .csv("C:/Users/Acer/IdeaProjects/spark_project/in/*.csv");
-        System.out.println(fileStreamDF.isStreaming());
-        fileStreamDF.printSchema();
+//        System.out.println(fileStreamDF.isStreaming());
+//        fileStreamDF.printSchema();
 
+//        System.out.println("********** result of 2 columns(name and date)in console ");
 //        Dataset<Row> trimmedDF = fileStreamDF.select(fileStreamDF.col("name"), fileStreamDF.col("date"));
 //        StreamingQuery query = trimmedDF.writeStream()
 //                .outputMode("append")
@@ -101,21 +103,6 @@ public class Main {
 //                .format("csv")
 //                .csv("C:/Users/Acer/IdeaProjects/spark_project/out/result");
 
-
-//        Dataset<Row> dataset = session.read()
-//                .format("jdbc")
-//                .option("url", "jdbc:mysql://localhost:3306/sparktestdb")
-//                .option("dbtable", "sparktestdb")
-//                .option("user", "root")
-//                .option("password", "1234")
-//                .load();
-//        Dataset<Row> dataset1 = dataset.withColumn(number, dataset.col(number).cast("long"));
-////        dataset1.show();
-//        session.sql("select * from sparktestdb").show();
-
-        //        Dataset<Row> dataset = session.read().option("header", "true").csv("in/data.txt");
-//        Dataset<Row> dataset2 = dataset.withColumn(number, dataset.col(number).cast("double")).withColumn(date, dataset.col(date));
-//        dataset2.show();
 
     }
 }
