@@ -53,7 +53,7 @@ public class Main {
         //read from csv file
         System.out.println("********** Read from CSV file *********");
         System.out.println(new Date());
-        Dataset<Row> fileStreamDF = session.read()
+        Dataset<Row> csvDF = session.read()
                 .option("header", "true")
                 .format("csv")
                 .schema(schema)
@@ -73,7 +73,7 @@ public class Main {
 
 
         System.out.println("*********** save into database *************");
-        fileStreamDF.write()
+        csvDF.write()
                 .format("jdbc")
                 .option("url", "jdbc:mysql://localhost:3306/sparktestdb")
                 .option("dbtable", "sparktestdb4")
